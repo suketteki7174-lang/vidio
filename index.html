@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gabung Foto dan Video</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#08111f">
+
+<style>
+
+:root{--bg:#08111f;--panel:#111d30;--panel2:#17263d;--line:#293a54;--text:#edf4ff;--muted:#a8bad3;--blue:#5b8cff;--cyan:#4de1d2;--red:#ff6b81}
+
+*{box-sizing:border-box}body{margin:0;padding:22px;background:radial-gradient(ellipse at 15% 0%,#1c3760 0%,#0b1424 43%,#070d17 100%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,Arial}
+
+.wrap{max-width:1200px;margin:auto}.hero{position:relative;overflow:hidden;padding:28px;border:1px solid #38557e;border-radius:22px;background:linear-gradient(120deg,rgba(28,58,103,.98),rgba(31,87,157,.9) 58%,rgba(18,143,157,.78));box-shadow:0 18px 55px #0005;margin-bottom:18px}
+
+.hero:after{content:"";position:absolute;width:260px;height:260px;border:1px solid #ffffff20;border-radius:50%;right:-45px;top:-115px;box-shadow:0 0 0 24px #ffffff08,0 0 0 52px #ffffff06}
+
+.eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border:1px solid #ffffff38;background:#ffffff12;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:1.4px;color:#bffaf4}
+
+.hero h1{margin:10px 0 5px;font-size:clamp(27px,4vw,39px);letter-spacing:-1px;line-height:1.1}.hero p{margin:0;color:#d8e9ff;max-width:660px}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.92fr);gap:17px}.panel{background:linear-gradient(155deg,#142239,#0f1a2b);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 12px 32px #0002;min-width:0}
+
+h2{font-size:18px;margin:0 0 14px;letter-spacing:-.2px}.section-num{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(140deg,var(--blue),#7a5cff);color:white;font-size:13px;margin-right:8px}
+
+.drop{border:1px dashed #54729c;border-radius:14px;padding:20px;text-align:center;background:linear-gradient(145deg,#172941,#101d30);color:#dceaff}.drop strong{display:block;font-size:16px;margin-bottom:4px}.drop input{max-width:100%;margin-top:12px;color:var(--muted)}
+
+.list{display:flex;flex-direction:column;gap:9px;margin-top:13px}.item{display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:10px;padding:10px;border:1px solid #2b3c55;border-radius:12px;background:#101c2d;transition:border-color .15s,transform .15s}.item:hover{border-color:#5479b7}.item.sel{background:#182d4b;border-color:var(--blue);box-shadow:0 0 0 1px #5b8cff22}.thumb{width:48px;height:48px;object-fit:cover;border-radius:9px;background:#22334a;display:grid;place-items:center;color:#a8c3eb}.name{font-size:13px;font-weight:750;overflow-wrap:anywhere;color:#f0f6ff}.meta{font-size:11px;color:var(--muted);margin-top:2px}.item input[type=text]{width:100%;padding:8px;margin-top:7px;border:1px solid #354966;border-radius:8px;font:12px system-ui;background:#0a1524;color:white;outline:none}.item input[type=text]:focus{border-color:var(--cyan);box-shadow:0 0 0 2px #4de1d222}
+
+.field{margin-top:13px}.field label{display:block;font-weight:700;font-size:13px;color:#dce8fa;margin-bottom:6px}.field input:not([type=range]),.field select{width:100%;padding:11px;border:1px solid #354966;border-radius:10px;background:#0b1728;color:#edf4ff;outline:none}.field input[type=range]{width:100%;accent-color:#4de1d2}.field select:focus,.field input:focus{border-color:var(--blue);box-shadow:0 0 0 2px #5b8cff22}option{background:#102038;color:white}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}button{border:1px solid transparent;border-radius:10px;padding:10px 12px;font-weight:750;cursor:pointer;transition:transform .12s,filter .12s}button:hover{filter:brightness(1.08);transform:translateY(-1px)}.btns button{flex:1}.primary{background:linear-gradient(110deg,#477dff,#6856f5);color:white;box-shadow:0 6px 18px #315cf33b}.secondary{background:#233651;color:#e3edff;border-color:#344b6b}.danger{background:#3c202e;color:#ffb9c5;border-color:#633244}button:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.preview{background:#050a12;min-height:210px;border:1px solid #273950;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:13px}.preview video{width:100%;max-height:50vh}.placeholder{color:#8ca3c2;text-align:center;padding:24px}.status{font-size:13px;color:#b5c6dc;min-height:22px;margin-top:11px}progress{width:100%;height:10px;margin-top:9px;accent-color:var(--cyan)}.hint{font-size:12px;line-height:1.55;color:#91a7c3}.download{display:block;text-align:center;padding:13px;border-radius:10px;background:linear-gradient(100deg,#087f68,#13a77d);color:white;text-decoration:none;font-weight:800;margin-top:12px;box-shadow:0 7px 18px #087f6833}.count{font-size:12px;color:#9eb3cf;margin-top:9px}.tip{border:1px solid #2d4967;background:#10243a;color:#c3d9f6;padding:10px 12px;border-radius:10px;font-size:12px;margin-top:12px}
+
+@media(max-width:820px){.layout{grid-template-columns:1fr}body{padding:10px}.hero{padding:22px}.panel{padding:14px}}
+
+</style></head><body><main class="wrap">
+
+<header class="hero"><span class="eyebrow">✦ CREATOR STUDIO • BY.SUKET TEKI</span><h1>STUDIO GABUNG FOTO & VIDIO</h1><p>Rangkai foto, klip, teks dan musik menjadi satu video.</p></header>
+
+<div class="layout"><section class="panel"><h2><span class="section-num">01</span>Susun media</h2><div class="drop"><strong>＋ Tambahkan foto atau video</strong><span style="font-size:12px;color:#a8bad3">Pilih beberapa file sekaligus dari komputer</span><br><input id="files" type="file" accept="image/*,video/*" multiple></div><div id="count" class="count">Belum ada media.</div><div id="list" class="list"></div><div class="btns"><button id="up" class="secondary">↑ Naikkan</button><button id="down" class="secondary">↓ Turunkan</button><button id="remove" class="danger">Hapus pilihan</button></div><p class="hint">Isi kolom teks di bawah setiap media untuk memberi tulisan berbeda pada masing-masing foto atau klip. Urutan dari atas ke bawah menentukan urutan video akhir.</p></section>
+
+<section class="panel"><h2><span class="section-num">02</span>Atur & ekspor video</h2><div class="grid"><div class="field"><label for="size">Resolusi</label><select id="size"><option value="480">Ringan 854×480</option><option value="720">HD 1280×720</option></select></div><div class="field"><label for="seconds">Durasi tiap foto</label><select id="seconds"><option value="2">2 detik</option><option value="3" selected>3 detik</option><option value="5">5 detik</option><option value="8">8 detik</option></select></div></div><div class="field"><label for="fit">Tampilan media</label><select id="fit"><option value="cover" selected>Penuhi layar (bisa terpotong)</option><option value="contain">Tampilkan utuh (tepi hitam mungkin muncul)</option></select></div><div class="field"><label for="transition">Peralihan antar media</label><select id="transition"><option value="fade">Pudar singkat</option><option value="cut">Potong langsung</option></select></div>
+
+<div class="grid"><div class="field"><label for="textpos">Posisi teks</label><select id="textpos"><option value="bl">Kiri bawah</option><option value="bc" selected>Tengah bawah</option><option value="br">Kanan bawah</option><option value="tc">Tengah atas</option></select></div><div class="field"><label for="textsize">Ukuran teks</label><select id="textsize"><option value="small">Kecil</option><option value="medium" selected>Sedang</option><option value="large">Besar</option></select></div></div>
+
+<div class="grid"><div class="field"><label for="textcolor">Warna teks</label><select id="textcolor"><option value="#ffffff" selected>Putih</option><option value="#ffeb3b">Kuning</option><option value="#ff5252">Merah</option><option value="#64ffda">Hijau muda</option><option value="#111827">Hitam</option></select></div><div class="field"><label for="textbg">Latar teks</label><select id="textbg"><option value="dark" selected>Hitam transparan</option><option value="none">Tanpa latar</option><option value="light">Putih transparan</option></select></div></div>
+
+<div class="field"><label for="music">Musik latar (opsional)</label><input id="music" type="file" accept="audio/*"></div>
+
+<div class="grid"><div class="field"><label for="volume">Volume musik <span id="volVal">65%</span></label><input id="volume" type="range" min="0" max="100" value="65"></div><div class="field"><label for="fadeAudio">Fade musik</label><select id="fadeAudio"><option value="none">Tanpa fade</option><option value="inout" selected>Fade awal & akhir</option></select></div></div>
+
+<div class="field"><label for="filter">Filter warna video</label><select id="filter"><option value="none">Normal</option><option value="cinema">Cinematic</option><option value="warm">Hangat</option><option value="cool">Dingin</option><option value="mono">Hitam putih</option><option value="vivid">Warna cerah</option></select></div>
+
+<div class="grid"><div class="field"><label for="intro">Judul pembuka (opsional)</label><input id="intro" maxlength="100" placeholder="Contoh: FEDBON ROAD TRIP"></div><div class="field"><label for="introDur">Durasi pembuka</label><select id="introDur"><option value="2">2 detik</option><option value="3" selected>3 detik</option><option value="5">5 detik</option></select></div></div>
+
+<div class="grid"><div class="field"><label for="introBg">Warna dasar pembuka</label><input id="introBg" type="color" value="#08111f" style="width:100%;height:44px;padding:4px;border:1px solid #354966;border-radius:10px;background:#0b1728"></div><div class="field"><label for="introTextColor">Warna tulisan pembuka</label><input id="introTextColor" type="color" value="#ffffff" style="width:100%;height:44px;padding:4px;border:1px solid #354966;border-radius:10px;background:#0b1728"></div></div>
+
+<div class="grid"><div class="field"><label for="outro">Judul penutup (opsional)</label><input id="outro" maxlength="100" placeholder="Contoh: Sampai jumpa di perjalanan berikutnya"></div><div class="field"><label for="aspect">Format video</label><select id="aspect"><option value="landscape" selected>16:9 Lanskap</option><option value="portrait">9:16 Vertikal</option><option value="square">1:1 Persegi</option></select></div></div>
+
+<div class="grid"><div class="field"><label for="outroBg">Warna dasar penutup</label><input id="outroBg" type="color" value="#08111f" style="width:100%;height:44px;padding:4px;border:1px solid #354966;border-radius:10px;background:#0b1728"></div><div class="field"><label for="outroTextColor">Warna tulisan penutup</label><input id="outroTextColor" type="color" value="#ffffff" style="width:100%;height:44px;padding:4px;border:1px solid #354966;border-radius:10px;background:#0b1728"></div></div><div class="preview"><div id="placeholder" class="placeholder">Hasil video akan tampil di sini setelah ekspor.</div><video id="result" controls hidden></video></div><div class="btns"><button id="export" class="primary">▶ Gabungkan & ekspor video</button></div><progress id="progress" value="0" max="100" hidden></progress><div id="status" class="status">Tambahkan media untuk memulai.</div><div id="download"></div><div class="tip">✦ Tip: isi kolom teks di bawah setiap media agar tiap foto atau klip punya judulnya sendiri.</div><p class="hint"></p></section></div></main>
+
+<script>
+
+(()=>{const $=id=>document.getElementById(id);let items=[],sel=-1,musicUrl=null,outUrl=null;
+
+const status=t=>$('status').textContent=t,fmt=n=>n<1048576?Math.round(n/1024)+' KB':(n/1048576).toFixed(1)+' MB';
+
+$('files').onchange=e=>{for(const f of e.target.files){if(!f.type.startsWith('image/')&&!f.type.startsWith('video/'))continue;items.push({f,url:URL.createObjectURL(f),type:f.type.startsWith('image/')?'image':'video'})}e.target.value='';render();status('Media ditambahkan. Atur urutan, lalu ekspor.')};
+
+function render(){const list=$('list');list.replaceChildren();items.forEach((it,i)=>{const row=document.createElement('div');row.className='item'+(i===sel?' sel':'');row.onclick=()=>{sel=i;render()};let thumb;if(it.type==='image'){thumb=document.createElement('img');thumb.src=it.url}else{thumb=document.createElement('div');thumb.textContent='▶'}thumb.className='thumb';row.append(thumb);const info=document.createElement('div'),n=document.createElement('div'),m=document.createElement('div'),cap=document.createElement('input');n.className='name';n.textContent=(i+1)+'. '+it.f.name;m.className='meta';m.textContent=(it.type==='image'?'Foto':'Video')+' • '+fmt(it.f.size);cap.type='text';cap.maxLength=120;cap.placeholder='Teks untuk foto/video ini (opsional)';cap.value=it.caption||'';cap.style='width:100%;padding:7px;margin-top:6px;border:1px solid #cbd5e1;border-radius:7px;font:12px system-ui';cap.onclick=e=>e.stopPropagation();cap.oninput=()=>{it.caption=cap.value};const colorWrap=document.createElement('div');colorWrap.style='display:flex;align-items:center;gap:7px;margin-top:6px;font-size:11px;color:#a8bad3';const colorLabel=document.createElement('span');colorLabel.textContent='Warna teks';const colorInput=document.createElement('input');colorInput.type='color';colorInput.value=it.captionColor||$('textcolor').value;colorInput.title='Pilih warna teks untuk media ini';colorInput.style='width:34px;height:28px;padding:2px;border:1px solid #354966;border-radius:6px;background:#0b1728;cursor:pointer';colorInput.onclick=e=>e.stopPropagation();colorInput.oninput=()=>{it.captionColor=colorInput.value};colorWrap.append(colorLabel,colorInput);info.append(n,m,cap,colorWrap);row.append(info);const b=document.createElement('button');b.className='secondary';b.textContent='Pilih';b.onclick=e=>{e.stopPropagation();sel=i;render()};row.append(b);list.append(row)});$('count').textContent=items.length?items.length+' media':'Belum ada media.'}
+
+function move(d){if(sel<0||sel+d<0||sel+d>=items.length)return;[items[sel],items[sel+d]]=[items[sel+d],items[sel]];sel+=d;render()}
+
+$('up').onclick=()=>move(-1);$('down').onclick=()=>move(1);$('remove').onclick=()=>{if(sel<0)return;URL.revokeObjectURL(items[sel].url);items.splice(sel,1);sel=-1;render();status('Media dihapus.')};
+
+$('volume').oninput=()=> $('volVal').textContent=$('volume').value+'%';$('music').onchange=()=>{if(musicUrl)URL.revokeObjectURL(musicUrl);musicUrl=$('music').files[0]?URL.createObjectURL($('music').files[0]):null};
+
+const loadImg=url=>new Promise((res,rej)=>{const x=new Image();x.onload=()=>res(x);x.onerror=rej;x.src=url});
+
+const loadVid=url=>new Promise((res,rej)=>{const v=document.createElement('video');v.preload='auto';v.muted=true;v.playsInline=true;v.onloadedmetadata=()=>res(v);v.onerror=rej;v.src=url;v.load()});
+
+function paint(ctx,source,W,H,fit,captionText='',captionColor=null){const sw=source.videoWidth||source.naturalWidth,sh=source.videoHeight||source.naturalHeight;if(!sw||!sh)return;const s=fit==='cover'?Math.max(W/sw,H/sh):Math.min(W/sw,H/sh),w=sw*s,h=sh*s;ctx.fillStyle='#000';ctx.fillRect(0,0,W,H);const filt=$('filter').value;ctx.save();ctx.filter=filt==='mono'?'grayscale(1)':filt==='warm'?'sepia(.25) saturate(1.2)':filt==='cool'?'saturate(.9) hue-rotate(12deg)':filt==='vivid'?'saturate(1.45) contrast(1.05)':filt==='cinema'?'contrast(1.12) saturate(.9) brightness(.92)':'none';ctx.drawImage(source,(W-w)/2,(H-h)/2,w,h);ctx.restore();drawCaption(ctx,W,H,captionText,captionColor)}
+
+function drawCaption(ctx,W,H,textValue='',captionColor=null){const text=(textValue||'').trim();if(!text)return;const size=$('textsize').value,fs=Math.round(W*(size==='small'?.025:size==='large'?.052:.037)),pad=Math.round(W*.022);ctx.save();ctx.font='700 '+fs+'px Arial, sans-serif';ctx.textBaseline='middle';ctx.textAlign='left';const maxTextW=W-pad*4;let lines=[],words=text.split(/\s+/),line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>maxTextW&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);const lineH=fs*1.22,boxH=lines.length*lineH+pad,boxW=Math.min(W-pad*2,Math.max(...lines.map(l=>ctx.measureText(l).width))+pad*2);let x=pad,y=H-boxH-pad;const pos=$('textpos').value;if(pos==='bc'||pos==='tc')x=(W-boxW)/2;if(pos==='br')x=W-boxW-pad;if(pos==='tc')y=pad;if($('textbg').value==='dark'){ctx.fillStyle='rgba(0,0,0,.62)';ctx.fillRect(x,y,boxW,boxH)}else if($('textbg').value==='light'){ctx.fillStyle='rgba(255,255,255,.72)';ctx.fillRect(x,y,boxW,boxH)}ctx.fillStyle=captionColor||$('textcolor').value;lines.forEach((l,i)=>ctx.fillText(l,x+pad,y+pad/2+lineH*(i+.5),boxW-pad*2));ctx.restore()}
+
+$('export').onclick=async()=>{if(!items.length){status('Tambahkan setidaknya satu foto atau video.');return}if(!HTMLCanvasElement.prototype.captureStream||!window.MediaRecorder){status('Browser tidak mendukung ekspor. Coba Chrome atau Edge terbaru.');return}
+
+$('export').disabled=true;$('progress').hidden=false;$('progress').value=0;$('download').replaceChildren();status('Menyiapkan video...');
+
+let W=+$('size').value===720?1280:854,H=+$('size').value===720?720:480;const aspect=$('aspect').value;if(aspect==='portrait'){W=+$('size').value===720?720:480;H=+$('size').value===720?1280:854}else if(aspect==='square'){W=H=+$('size').value===720?720:480}const can=document.createElement('canvas');can.width=W;can.height=H;const ctx=can.getContext('2d'),stream=can.captureStream(24);
+
+let ac=null,music=null;
+
+try{if(musicUrl&&window.AudioContext){ac=new AudioContext();music=new Audio(musicUrl);music.loop=true;music.volume=+$('volume').value/100;const src=ac.createMediaElementSource(music),dest=ac.createMediaStreamDestination();src.connect(dest);src.connect(ac.destination);dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));await ac.resume();await music.play().catch(()=>{})}}catch(e){}
+
+const types=['video/mp4;codecs=avc1.42E01E','video/mp4','video/webm;codecs=vp9','video/webm'];const mime=types.find(t=>MediaRecorder.isTypeSupported(t))||'';let rec;
+
+try{rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:4000000}:undefined)}catch(e){stream.getTracks().forEach(t=>t.stop());$('export').disabled=false;status('Gagal mulai ekspor. Coba resolusi Ringan.');return}
+
+const chunks=[];rec.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};rec.onerror=()=>status('Terjadi kesalahan saat merekam. Coba klip lebih kecil.');
+
+rec.onstop=async()=>{stream.getTracks().forEach(t=>t.stop());if(music){music.pause();music.src=''}if(ac)await ac.close().catch(()=>{});$('export').disabled=false;const type=rec.mimeType||mime||'video/webm',blob=new Blob(chunks,{type});if(!blob.size){status('File kosong. Coba lagi.');return}if(outUrl)URL.revokeObjectURL(outUrl);outUrl=URL.createObjectURL(blob);const ext=type.includes('mp4')?'mp4':'webm',a=document.createElement('a');a.href=outUrl;a.download='gabungan-media.'+ext;a.className='download';a.textContent='Unduh video '+ext.toUpperCase();$('download').replaceChildren(a);$('result').src=outUrl;$('result').hidden=false;$('placeholder').hidden=true;$('progress').value=100;status('Selesai: '+ext.toUpperCase()+' • '+fmt(blob.size)+'. Klik tombol hijau untuk menyimpan.')};
+
+rec.start(250);
+
+try{const introText=$('intro').value.trim(),outroText=$('outro').value.trim();async function titleCard(text,ms,bgColor,textColor){if(!text)return;const begin=performance.now();await new Promise(resolve=>{function f(){const p=Math.min(1,(performance.now()-begin)/ms);ctx.fillStyle=bgColor;ctx.fillRect(0,0,W,H);ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=textColor;ctx.font='800 '+Math.round(W*.055)+'px system-ui';const words=text.split(/\s+/);let lines=[],line='';for(const word of words){const test=line?line+' '+word:word;if(ctx.measureText(test).width>W*.82&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);lines.forEach((l,j)=>ctx.fillText(l,W/2,H/2+(j-(lines.length-1)/2)*W*.07,W*.84));$('progress').value=Math.round(p*100/(items.length+2));if(p>=1)resolve();else requestAnimationFrame(f)}requestAnimationFrame(f)})}await titleCard(introText,+$('introDur').value*1000,$('introBg').value,$('introTextColor').value);for(let i=0;i<items.length;i++){const it=items[i];status('Memproses '+(i+1)+' dari '+items.length+': '+it.f.name);let source,duration;if(it.type==='image'){source=await loadImg(it.url);duration=+$('seconds').value*1000}else{source=await loadVid(it.url);duration=(Number.isFinite(source.duration)&&source.duration>0?source.duration:+$('seconds').value)*1000;source.currentTime=0;await source.play().catch(()=>{})}
+
+const begin=performance.now(),fit=$('fit').value,fade=$('transition').value==='fade';
+
+await new Promise(resolve=>{function frame(){const p=Math.min(1,(performance.now()-begin)/duration);paint(ctx,source,W,H,fit,it.caption||'',it.captionColor||$('textcolor').value);if(fade&&i>0&&p<.10){ctx.fillStyle='rgba(0,0,0,'+(.35*(1-p/.10))+')';ctx.fillRect(0,0,W,H)}$('progress').value=Math.round(((i+p+(introText?1:0))/(items.length+(introText?1:0)+(outroText?1:0)))*100);if(it.type==='video'&&(source.ended||p>=1)){source.pause();resolve();return}if(p>=1){resolve();return}requestAnimationFrame(frame)}requestAnimationFrame(frame)});
+
+if(it.type==='video'){source.pause();source.removeAttribute('src');source.load()}}await titleCard(outroText,+$('introDur').value*1000,$('outroBg').value,$('outroTextColor').value);rec.stop()}catch(err){console.error(err);status('Media tidak bisa diproses. Coba JPG, PNG, MP4 atau file lebih kecil.');try{if(rec.state!=='inactive')rec.stop()}catch(e){}}};
+
+})();
+
+</script>
+<!-- PWA: daftarkan service worker agar aplikasi dapat digunakan offline -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./service-worker.js")
+      .then(function (registration) {
+        console.log("Service Worker aktif:", registration.scope);
+      })
+      .catch(function (error) {
+        console.error("Service Worker gagal:", error);
+      });
+  });
+}
+</script>
+
+</body>
+</html>

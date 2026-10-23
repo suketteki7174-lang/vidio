@@ -1,0 +1,29 @@
+
+{
+  "id": "./",
+  "name": "Studio Gabung Foto & Video",
+  "short_name": "Studio Video",
+  "description": "Editor offline untuk menggabungkan foto, video, teks, dan musik.",
+  "lang": "id-ID",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#08111f",
+  "theme_color": "#08111f",
+  "categories": ["video", "photo", "utilities"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
